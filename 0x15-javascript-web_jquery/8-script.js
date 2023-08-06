@@ -1,5 +1,12 @@
-// JavaScript script that fetches the character name
+// JavaScript script that fetches and lists the title for all movies
 
-$.getJSON('https://swapi-api.hbtn.io/api/people/5/?format=json', function (data) {
-    $('DIV#character').html(data['name']);
+$(() => {
+  $.get('https://swapi-api.hbtn.io/api/films/?format=json', (data, textStatus) => {
+    if (textStatus === 'success') {
+      const films = data.results;
+      films.forEach(film => {
+        $('#list_movies').append('<li>' + film.title + '</li>');
+      });
+    }
+  });
 });
